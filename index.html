@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Plano de Aulas</title>
+</head>
+<body>
+  <h1>Plano de Aulas</h1>
+  <button id="loginBtn">Entrar com Google</button>
+  <p id="status"></p>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js"></script>
+
+  <script>
+    // 🔁 Troque pelas suas credenciais reais:
+ const firebaseConfig = {
+    apiKey: "AIzaSyCbHEwNtXIw2ox5bAyOQuBR6Y8j_yNr4zQ",
+    authDomain: "plano-de-aulas-a1cc9.firebaseapp.com",
+    projectId: "plano-de-aulas-a1cc9",
+    storageBucket: "plano-de-aulas-a1cc9.firebasestorage.app",
+    messagingSenderId: "815505490085",
+    appId: "1:815505490085:web:b4e407359c96850f4fcd4c",
+    measurementId: "G-9Z4C9SQC94"
+  };
+
+    // Inicializa Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // Login com Google
+    document.getElementById("loginBtn").onclick = () => {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      auth.signInWithPopup(provider)
+        .then(result => {
+          document.getElementById("status").innerText = "Logado como: " + result.user.email;
+        })
+        .catch(error => {
+          console.error("Erro no login:", error);
+        });
+    };
+  </script>
+</body>
+</html>
